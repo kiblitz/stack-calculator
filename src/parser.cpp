@@ -35,6 +35,11 @@ int parse(std::stack<double>& stack, std::string val) {
       double a = stack_pop(stack);
       stack.push(a / b);
 
+    } else if (val == "^") { // exponent
+      double b = stack_pop(stack);
+      double a = stack_pop(stack);
+      stack.push(std::pow(a, b)); 
+
     } else {
       try {
         double num = std::stod(val);
