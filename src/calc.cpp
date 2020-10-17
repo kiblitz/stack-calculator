@@ -1,8 +1,9 @@
+
 #include <iostream>
 #include <sstream>
 #include <stack>
 
-bool parse(std::stack<double> stack, std::string val);
+#include "parser.h"
 
 int main(int argc, const char* argv[]) {
   for (int i = 1; i < argc; ++i) {
@@ -17,19 +18,24 @@ int main(int argc, const char* argv[]) {
     std::getline(std::cin, input);
     
     std::istringstream iss(input);
-    while (iss && running) {
+    bool valid = true;
+    while (iss && valid) {
       std::string comm;
       iss >> comm;
-      
-      running = parse(stack, comm);
+      if (comm == "") {
+        break;
+      }
+    
+      switch(parse(stack, comm)) {
+        case 0:
+          running = false; 
+          valid = false;
+          break;
+        case -1:
+          valid = false; 
+          break;
+      }
     }
   }
 }
 
-bool parse(std::stack<double> stack, std::string val) {
-  if (val == "quit") {
-    return false;
-  }
-  // Parse different commands
-  return true;
-}
