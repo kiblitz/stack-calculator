@@ -19,6 +19,7 @@ int main(int argc, const char* argv[]) {
     
     std::istringstream iss(input);
     bool valid = true;
+    int skip = 0;
     while (iss && valid) {
       std::string comm;
       iss >> comm;
@@ -26,7 +27,7 @@ int main(int argc, const char* argv[]) {
         break;
       }
     
-      switch(parse(stack, comm)) {
+      switch(parse(stack, comm, skip)) {
         case 0:
           running = false; 
           valid = false;

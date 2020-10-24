@@ -1,7 +1,11 @@
 
 #include "parser.h"
 
-int parse(std::stack<double>& stack, std::string val) {
+int parse(std::stack<double>& stack, std::string val, int& skip) {
+  if (skip > 0) {
+    --skip;
+    return 1;
+  }
   try {
     if (val == "quit") {
       return 0;
@@ -25,7 +29,44 @@ int parse(std::stack<double>& stack, std::string val) {
       for (int i = 0; i < std::floor(a); ++i) {
         stack_pop_nore(stack);
       }
-  
+
+    } else if (val == "skip") {                   // skip
+      int a = (int)stack_pop(stack);
+      skip = a;
+
+    } else if (val == "if") {                       // if
+      double a = stack_pop(stack);
+      if (a == 0) {
+        skip = 3; 
+      }
+
+    } else if (val == ">") {                   // greater
+      double b = stack_pop(stack);
+      double a = stack_pop(stack);
+      if (a > b) {
+        stack.push(1);
+      } else {
+        stack.push(0);
+      }
+
+    } else if (val == "<") {                      // less
+      double b = stack_pop(stack);
+      double a = stack_pop(stack);
+      if (a < b) {
+        stack.push(1);
+      } else {
+        stack.push(0);
+      }
+
+    } else if (val == "=") {                     // equal
+      double b = stack_pop(stack);
+      double a = stack_pop(stack);
+      if (a == b) {
+        stack.push(1);
+      } else {
+        stack.push(0);
+      }
+
     } else if (val == "+") {                      // plus
       double b = stack_pop(stack);
       double a = stack_pop(stack);
