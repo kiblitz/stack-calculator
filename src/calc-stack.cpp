@@ -1,6 +1,13 @@
 
 #include "calc-stack.h"
 
+void stack_pop_nore(std::stack<double>& stack) {
+  if (stack.empty()) {
+    throw std::runtime_error("Not enough tokens in stack");
+  }
+  stack.pop();
+}
+
 double stack_pop(std::stack<double>& stack) {
   if (stack.empty()) {
     throw std::runtime_error("Not enough tokens in stack");

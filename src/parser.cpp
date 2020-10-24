@@ -11,7 +11,21 @@ int parse(std::stack<double>& stack, std::string val) {
 
     } else if (val == "stack") {
       stack_print(stack);
+  
+    } else if (val == "clear") {
+      while (!stack.empty()) {
+        stack_pop_nore(stack);
+      }   
 
+    } else if (val == "pop") {                     // pop 
+      stack_pop_nore(stack);
+
+    } else if (val == "popn") {                   // popn
+      double a = stack_pop(stack);
+      for (int i = 0; i < std::floor(a); ++i) {
+        stack_pop_nore(stack);
+      }
+  
     } else if (val == "+") {                      // plus
       double b = stack_pop(stack);
       double a = stack_pop(stack);
