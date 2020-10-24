@@ -66,6 +66,46 @@ int parse(std::stack<double>& stack, std::string val) {
     } else if (val == "pi") {                       // pi
       stack.push(2 * std::acos(0));
 
+    } else if (val == "ln") {                     // log 
+      double a = stack_pop(stack);
+      if (a <= 0) {
+        throw std::runtime_error("Log of non-positive value error");
+      }
+      stack.push(std::log(a));
+    
+    } else if (val == "sin") {                     // sin
+      double a = stack_pop(stack);
+      stack.push(std::sin(a));
+    
+    } else if (val == "arcsin") {               // arcsin
+      double a = stack_pop(stack);
+      if (a < -1 || a > 1) {
+        throw std::runtime_error("Arcsin undefined for value error");
+      }
+      stack.push(std::asin(a));
+    
+    } else if (val == "cos") {                     // cos
+      double a = stack_pop(stack);
+      stack.push(std::cos(a));
+       
+    } else if (val == "arccos") {               // arccos
+      double a = stack_pop(stack);
+      if (a < -1 || a > 1) {
+        throw std::runtime_error("Arccos undefined for value error");
+      }
+      stack.push(std::acos(a));
+    
+    } else if (val == "tan") {                     // tan
+      double a = stack_pop(stack);
+      if (std::cos(a) == 0) {
+        throw std::runtime_error("Tan undefined for value error");
+      }
+      stack.push(std::tan(a));
+       
+    } else if (val == "arctan") {               // arctan
+      double a = stack_pop(stack);
+      stack.push(std::atan(a));
+    
     } else {
       try {
         double num = std::stod(val);
