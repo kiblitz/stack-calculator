@@ -32,3 +32,24 @@ void stack_print(std::stack<double>& stack) {
   }
 }
 
+double stack_pick(std::stack<double>& stack, int pos) {
+  std::stack<double> temp;
+  for (int i = 0; i < pos; ++i) {
+    if (stack.empty()) {
+      while (!temp.empty()) {
+        stack.push(temp.top());
+        temp.pop();
+      } 
+      throw std::runtime_error("Not enough tokens in stack");
+    }
+    temp.push(stack.top());
+    stack.pop();
+  }
+  double val = temp.top();
+
+  while (!temp.empty()) {
+    stack.push(temp.top()); 
+    temp.pop();
+  }
+  return val;
+}

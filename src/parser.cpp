@@ -35,6 +35,11 @@ int parse(std::stack<double>& stack, std::string val, int& skip) {
       int a = (int)stack_pop(stack);
       skip = a;
 
+    } else if (val == "pick") {                   // pick
+      int a = (int)stack_pop(stack);
+      int n = stack_pick(stack, a);
+      stack.push(n);
+
     } else if (val == "swap") {
       double b = stack_pop(stack);
       double a = stack_pop(stack); 
