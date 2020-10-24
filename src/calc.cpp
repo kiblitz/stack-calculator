@@ -13,13 +13,13 @@ int main(int argc, const char* argv[]) {
  
   std::string input; 
   bool running = true;
+  int skip = 0;
   while (running) {
     std::cout << std::endl << "calc >> ";
     std::getline(std::cin, input);
     
     std::istringstream iss(input);
     bool valid = true;
-    int skip = 0;
     while (iss && valid) {
       std::string comm;
       iss >> comm;
