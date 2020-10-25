@@ -168,7 +168,7 @@ int parse(std::stack<double>& stack,
     } else if (val == "pi") {                       // pi
       stack.push(2 * std::acos(0));
 
-    } else if (val == "ln") {                     // log 
+    } else if (val == "ln") {                      // log 
       double a = stack_pop(stack);
       if (a <= 0) {
         throw std::runtime_error("Log of non-positive value error");
