@@ -72,7 +72,7 @@ int parse(std::stack<double>& stack,
 
     } else if (val == "pick") {                   // pick
       int a = (int)stack_pop(stack);
-      int n = stack_pick(stack, a);
+      double n = stack_pick(stack, a);
       stack.push(n);
 
     } else if (val == "swap") {
