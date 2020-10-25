@@ -28,7 +28,7 @@ Download the release and execute it in the following form
 - **pop**: removes top of stack
 - **popn**: removes top `n` elements of the stack (*ex: `1 2 3 2 popn` => `1`*)
 - **skip**: skips next `n` commands (*ex: `2 skip 1 2 3 4` => `3 4`*)
-- **pick**: copies the `n`'th element of the stack (*ex: `2 3 4 2 pick` => `2 3 4 3`*)
+- **pick**: copies the `n`th element of the stack (*ex: `2 3 4 2 pick` => `2 3 4 3`*)
 - **swap**: swaps top `2` elements of the stack
 - **if**: if the top element of the stack is `0`, skip the next `3` commands (*ex: `0 if 1 2 3 4` => `4`*)
 - **>**, **=**, **<**: `1` if true, `0` otherwise (*ex: `2 < 3` => `1`*)
