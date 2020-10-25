@@ -49,7 +49,10 @@ int parse(std::stack<double>& stack,
 
   // parser
   try {
-    if (val == "clear") {                        // clear
+    if (val == "noop") {                          // noop
+      return 1;
+    
+    } else if (val == "clear") {                 // clear
       while (!stack.empty()) {
         stack_pop_nore(stack);
       }   
