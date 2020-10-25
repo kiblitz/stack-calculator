@@ -1,18 +1,12 @@
 
-#include <iostream>
-#include <map>
-#include <queue>
-#include <sstream>
-#include <stack>
-
-#include "parser.h"
+#include "calc.h"
 
 int main(int argc, const char* argv[]) {
   std::map<std::string, std::queue<std::string>> custom;
   for (int i = 1; i < argc; ++i) {
-    // Run parsed files on interpreter
+    read(custom, argv[i]);
   }
-
+ 
   std::stack<double> stack;
   std::queue<std::string> definition;
   std::string input; 
@@ -20,6 +14,7 @@ int main(int argc, const char* argv[]) {
   int skip = 0;
   bool defining = false;
 
+  // interpreter
   while (running) {
     std::cout << std::endl << "calc >> ";
     std::getline(std::cin, input);
