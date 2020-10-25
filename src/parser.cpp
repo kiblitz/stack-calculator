@@ -13,7 +13,7 @@ int parse(std::stack<double>& stack,
   if (val == "quit") {
     return 0;
   } else if (val == "help") {
-    std::cout << "help";
+    help_print();
     return 1;
   } else if (val == "stack") {
     stack_print(stack);
@@ -241,3 +241,20 @@ int parse(std::stack<double>& stack,
   return 1;
 }
 
+void help_print() {
+  std::string help = 
+    "- quit: quits the program\n"
+    "- help: displays commands list\n"
+    "- stack: displays the stack\n"
+    "- noop: pass\n"
+    "- clear: empties stack\n"
+    "- pop: removes top of stack\n"
+    "- popn: removes top n elements of the stack (ex: 1 2 3 2 popn => 1)\n"
+    "- skip: skips next n commands (ex: 2 skip 1 2 3 4 => 3 4)\n"
+    "- pick: copies the nth element of the stack (ex: 2 3 4 2 pick => 2 3 4 3)\n"
+    "- swap: swaps top 2 elements of the stack\n"
+    "- if: if the top element of the stack is 0, skip the next 3 commands (ex: 0 if 1 2 3 4 => 4)\n"
+    "- >, =, <: 1 if true, 0 otherwise (ex: 2 < 3 => 1)\n"
+    "- +, -, *, /, //, %, ^, e, pi, ln, sin, arcsin, cos, arccos, tan, arctan: standard functions";
+  std::cout << help << std::endl;
+}

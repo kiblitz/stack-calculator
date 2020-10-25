@@ -15,3 +15,5 @@ int parse(std::stack<double>& stack,
           int& skip,
           bool stackMode);
 
+void help_print();
+
