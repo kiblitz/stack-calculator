@@ -12,5 +12,6 @@ int parse(std::stack<double>& stack,
           std::map<std::string, std::queue<std::string>>& custom, 
           bool& defining, 
           std::queue<std::string>& definition,
-          int& skip);
+          int& skip,
+          bool stackMode);
 

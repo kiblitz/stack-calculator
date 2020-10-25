@@ -2,9 +2,14 @@
 #include "calc.h"
 
 int main(int argc, const char* argv[]) {
+  bool stackMode = false;
   std::map<std::string, std::queue<std::string>> custom;
   for (int i = 1; i < argc; ++i) {
-    read(custom, argv[i]);
+    if (std::strcmp(argv[i], "--stack") == 0) {
+      stackMode = true;
+    } else {
+      read(custom, argv[i]);
+    }
   }
  
   std::stack<double> stack;
@@ -28,7 +33,7 @@ int main(int argc, const char* argv[]) {
         break;
       }
     
-      switch(parse(stack, comm, custom, defining, definition, skip)) {
+      switch(parse(stack, comm, custom, defining, definition, skip, stackMode)) {
         case 0:
           running = false; 
           valid = false;

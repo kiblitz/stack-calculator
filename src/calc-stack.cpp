@@ -30,6 +30,7 @@ void stack_print(std::stack<double>& stack) {
     std::cout << val << " ";
     temp.pop(); 
   }
+  std::cout << std::endl;
 }
 
 double stack_pick(std::stack<double>& stack, int pos) {

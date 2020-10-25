@@ -6,7 +6,8 @@ int parse(std::stack<double>& stack,
           std::map<std::string, std::queue<std::string>>& custom, 
           bool& defining, 
           std::queue<std::string>& definition, 
-          int& skip) {
+          int& skip,
+          bool stackMode) {
 
   // global functions
   if (val == "quit") {
@@ -208,11 +209,15 @@ int parse(std::stack<double>& stack,
       std::queue<std::string> series(custom[val]);
       while (!series.empty()) {
         std::string next = series.front();
-        int code = parse(stack, next, custom, defining, definition, skip);
+        series.pop();
+        bool sm = stackMode;
+        if (series.empty()) {
+          sm = false;
+        }
+        int code = parse(stack, next, custom, defining, definition, skip, sm);
         if (code != 1) {
           return code;
         } 
-        series.pop();
       }
 
     } else {
@@ -226,6 +231,9 @@ int parse(std::stack<double>& stack,
   } catch (std::exception& e) {
     std::cout << e.what() << std::endl;
     return -1;
+  }
+  if (stackMode) {
+    stack_print(stack);
   }
   return 1;
 }
