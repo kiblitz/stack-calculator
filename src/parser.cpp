@@ -1,7 +1,14 @@
 
 #include "parser.h"
 
-int parse(std::stack<double>& stack, std::string val, int& skip) {
+int parse(std::stack<double>& stack, 
+          std::string val, 
+          std::map<std::string, std::queue<std::string>>& custom, 
+          bool& defining, 
+          std::queue<std::string>& definition, 
+          int& skip) {
+
+  // global functions
   if (val == "quit") {
     return 0;
   } else if (val == "help") {
@@ -12,10 +19,34 @@ int parse(std::stack<double>& stack, std::string val, int& skip) {
     return 1;
   }
 
+  // when defining
+  if (defining) {
+    if (val == ";") {
+      defining = false;
+      if (!definition.empty()) {
+        std::string comm = definition.front(); 
+        definition.pop();
+        custom[comm] = std::queue<std::string>(definition);
+        definition = std::queue<std::string>();
+      }
+      return 1;
+    }
+    definition.push(val);
+    return 1;
+  } else {
+    if (val == ":") {
+      defining = true;
+      return 1;
+    }
+  }  
+
+  // skip tokens
   if (skip > 0) {
     --skip;
     return 1;
   }
+
+  // parser
   try {
     if (val == "clear") {                        // clear
       while (!stack.empty()) {
@@ -173,6 +204,17 @@ int parse(std::stack<double>& stack, std::string val, int& skip) {
       double a = stack_pop(stack);
       stack.push(std::atan(a));
 
+    } else if (custom.count(val) != 0) {
+      std::queue<std::string> series(custom[val]);
+      while (!series.empty()) {
+        std::string next = series.front();
+        int code = parse(stack, next, custom, defining, definition, skip);
+        if (code != 1) {
+          return code;
+        } 
+        series.pop();
+      }
+
     } else {
       try {
         double num = std::stod(val);
@@ -185,7 +227,6 @@ int parse(std::stack<double>& stack, std::string val, int& skip) {
     std::cout << e.what();
     return -1;
   }
-  // Parse different commands
   return 1;
 }
 
